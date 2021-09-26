@@ -53,7 +53,6 @@ kotlin {
 }
 
 dependencies {
-    implementation ("org.adw.library:discrete-seekbar:1.0.1")
     implementation(Deps.kotlin)
     implementation(Deps.appCompat)
     implementation(Deps.materialDesign)
