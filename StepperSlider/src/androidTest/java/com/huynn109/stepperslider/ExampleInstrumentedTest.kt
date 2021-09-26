@@ -1,4 +1,4 @@
-package com.huynn109.stepperpercent
+package com.huynn109.stepperslider
 
 import androidx.test.platform.app.InstrumentationRegistry
 import androidx.test.ext.junit.runners.AndroidJUnit4

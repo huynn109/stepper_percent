@@ -10,7 +10,7 @@ object BuildPlugins {
  * To define dependencies
  */
 object Deps {
-    const val stepperPercent = ":StepperPercent"
+    const val stepperSlider = ":StepperSlider"
     val appCompat by lazy { "androidx.appcompat:appcompat:${Versions.appCompat}" }
     val timber by lazy { "com.jakewharton.timber:timber:${Versions.timber}" }
     val kotlin by lazy { "org.jetbrains.kotlin:kotlin-stdlib-jdk7:${Versions.kotlin}" }

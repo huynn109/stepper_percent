@@ -64,7 +64,7 @@ afterEvaluate {
                 from(components["release"])
                 // You can then customize attributes of the publication as shown below.
                 groupId = "com.github.huynn109"
-                artifactId = "stepperpercent"
+                artifactId = "stepper-percent"
                 version = "v0.0.2"
             }
         }

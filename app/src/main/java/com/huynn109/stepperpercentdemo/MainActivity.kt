@@ -2,8 +2,8 @@ package com.huynn109.stepperpercentdemo
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
-import com.huynn109.stepperpercent.StepperSlider
-import com.huynn109.stepperpercent.StepperPercent
+import com.huynn109.stepperslider.StepperSlider
+import com.huynn109.stepperslider.StepperPercent
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

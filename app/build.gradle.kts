@@ -34,7 +34,7 @@ android {
 }
 
 dependencies {
-    implementation(project(Deps.stepperPercent))
+    implementation(project(Deps.stepperSlider))
     implementation(Deps.kotlin)
     implementation(Deps.appCompat)
     implementation(Deps.materialDesign)

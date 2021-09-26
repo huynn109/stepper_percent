@@ -1,4 +1,4 @@
-package com.huynn109.stepperpercent
+package com.huynn109.stepperslider
 
 
 import android.annotation.SuppressLint

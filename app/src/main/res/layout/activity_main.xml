@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     tools:context=".MainActivity">
 
-    <com.huynn109.stepperpercent.StepperPercent
+    <com.huynn109.stepperslider.StepperPercent
         android:paddingStart="16dp"
         android:paddingEnd="16dp"
         android:id="@+id/stepperPercent"
