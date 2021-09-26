@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="StepPercentStyle" parent="@style/Widget.MaterialComponents.Slider">
+        <item name="labelStyle">@style/StepPercentTooltip</item>
+    </style>
+
+    <style name="StepPercentTooltip" parent="Widget.MaterialComponents.Tooltip">
+        <item name="backgroundTint">@color/yellow</item>
+        <item name="android:padding">0dp</item>
+        <item name="android:minHeight">18dp</item>
+        <item name="minWidth">16dp</item>
+        <item name="android:layout_margin">0dp</item>
+        <item name="android:textAppearance">@style/StepPercentOverlay.TextAppearance</item>
+        <item name="shapeAppearanceOverlay">@style/StepPercentOverlay</item>
+    </style>
+    <style name="StepPercentOverlay" >
+        <item name="cornerRadius">3dp</item>
+    </style>
+    <style name="StepPercentOverlay.TextAppearance" parent="@style/TextAppearance.MaterialComponents.Tooltip">
+        <item name="android:textColor">#ffffff</item>
+        <item name="android:textSize">8sp</item>
+    </style>
+</resources>
