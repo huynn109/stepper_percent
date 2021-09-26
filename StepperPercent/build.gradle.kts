@@ -1,10 +1,9 @@
-import org.jetbrains.kotlin.gradle.tasks.KotlinCompile
-
 plugins {
     id("com.android.library")
     kotlin("android")
     kotlin("android.extensions")
     kotlin("kapt")
+    id("maven-publish")
 }
 
 android {
@@ -19,12 +18,8 @@ android {
     }
 
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
-    }
-
-    tasks.withType<KotlinCompile> {
-        kotlinOptions.jvmTarget = "1.8"
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
     }
 
     androidExtensions {
@@ -60,3 +55,19 @@ dependencies {
     implementation(Deps.constraintLayout)
     testImplementation(Deps.junit)
 }
+afterEvaluate {
+    publishing {
+        publications {
+            // Creates a Maven publication called "release".
+            val release by publications.registering(MavenPublication::class) {
+                // Applies the component for the release build variant.
+                from(components["release"])
+                // You can then customize attributes of the publication as shown below.
+                groupId = "com.github.huynn109"
+                artifactId = "stepperpercent"
+                version = "v0.0.2"
+            }
+        }
+    }
+}
+
