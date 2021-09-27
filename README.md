@@ -6,5 +6,5 @@ StepperPercent is an Android library, which has a bubble view, icon stepper when
 
 # Screenshot
 
-<img src="https://raw.githubusercontent.com/huynn109/stepper_percent/main/screenshot/device-2021-09-27-134930.png" width="300">
+<img src="https://raw.githubusercontent.com/huynn109/stepper_percent/main/screenshot/demo-1.png">
 
