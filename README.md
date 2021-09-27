@@ -32,13 +32,28 @@ The lastest version: [![](https://jitpack.io/v/huynn109/stepper_percent.svg)](ht
 val stepperPercent = findViewById<StepperPercent>(R.id.stepperPercent)
         stepperPercent.apply {
             setSteps(
-                Pair(R.drawable.ic_baseline_adb_24, 0),
+                Pair(R.drawable.ic_baseline_adb_24, 0), // Add icon stepper and position
                 Pair(R.drawable.ic_baseline_adb_24, 28),
                 Pair(R.drawable.ic_baseline_adb_24, 56),
                 Pair(R.drawable.ic_baseline_adb_24, 84),
                 Pair(R.drawable.ic_baseline_adb_24, 100)
             )
-            value(35f)
-            disableTouch(false)
+            value(35f) // Set value slider
+            disableTouch(false) // Enable/Disable drag slider
         }
+```
+## License
+```
+   Copyright 2021 huynn109
+
+   Licensed under the Apache License, Version 2.0 (the "License");
+   you may not use this file except in compliance with the License.
+   You may obtain a copy of the License at
+
+     http://www.apache.org/licenses/LICENSE-2.0
+
+   Unless required by applicable law or agreed to in writing, software
+   distributed under the License is distributed on an "AS IS" BASIS,
+   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+   See the License for the specific language governing permissions and lim
 ```
