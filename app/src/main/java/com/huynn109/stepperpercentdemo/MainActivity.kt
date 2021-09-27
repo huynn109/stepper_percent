@@ -13,11 +13,11 @@ class MainActivity : AppCompatActivity() {
         val stepperPercent = findViewById<StepperPercent>(R.id.stepperPercent)
         stepperPercent.apply {
             setSteps(
-                Pair(R.drawable.ic_home_location, 0),
-                Pair(R.drawable.ic_home_info, 28),
-                Pair(R.drawable.ic_upload_image, 56),
-                Pair(R.drawable.ic_preview_checkout, 84),
-                Pair(R.drawable.ic_done, 100)
+                Pair(R.drawable.ic_baseline_adb_24, 0),
+                Pair(R.drawable.ic_baseline_adb_24, 28),
+                Pair(R.drawable.ic_baseline_adb_24, 56),
+                Pair(R.drawable.ic_baseline_adb_24, 84),
+                Pair(R.drawable.ic_baseline_adb_24, 100)
             )
             value(35f)
             disableTouch(false)

@@ -65,6 +65,7 @@ class StepperPercent : RelativeLayout {
         rootView = findViewById(R.id.root_view)
         linearProgressIndicator = findViewById(R.id.progress_indicator)
         linearMainLayout = findViewById(R.id.linear_main)
+        setColor()
     }
 
     fun value(v: Float) {
@@ -102,6 +103,11 @@ class StepperPercent : RelativeLayout {
         }
 
         typedArray.recycle()
+    }
+
+    private fun setColor() {
+        linearProgressIndicator.setActiveColor(activeColor)
+        linearProgressIndicator.setInActiveColor(inActiveColor)
     }
 
     @SuppressLint("ClickableViewAccessibility")
