@@ -1,6 +1,5 @@
 package com.huynn109.stepperslider
 
-
 import android.annotation.SuppressLint
 import android.content.Context
 import android.graphics.Bitmap
@@ -14,10 +13,6 @@ import com.google.android.material.slider.Slider
 import timber.log.Timber
 import kotlin.math.max
 
-
-/**
- * Seek bar with dots on it on specific time / percent
- */
 class StepperSlider : Slider {
     companion object {
         private const val DEFAULT_ICON_SIZE = 28
