@@ -49,11 +49,8 @@ kotlin {
 
 dependencies {
     implementation(Deps.kotlin)
-    implementation(Deps.appCompat)
     implementation(Deps.materialDesign)
-    implementation(Deps.timber)
     implementation(Deps.constraintLayout)
-    testImplementation(Deps.junit)
 }
 afterEvaluate {
     publishing {
@@ -65,7 +62,7 @@ afterEvaluate {
                 // You can then customize attributes of the publication as shown below.
                 groupId = "com.github.huynn109"
                 artifactId = "stepper-percent"
-                version = "v0.0.2"
+                version = "v0.0.8"
             }
         }
     }

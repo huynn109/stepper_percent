@@ -12,7 +12,6 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.slider.Slider
-import timber.log.Timber
 
 
 class StepperPercent : RelativeLayout {
@@ -61,7 +60,6 @@ class StepperPercent : RelativeLayout {
 
     private fun init() {
         View.inflate(context, R.layout.main_layout, this)
-        Timber.plant(Timber.DebugTree())
         rootView = findViewById(R.id.root_view)
         linearProgressIndicator = findViewById(R.id.progress_indicator)
         linearMainLayout = findViewById(R.id.linear_main)

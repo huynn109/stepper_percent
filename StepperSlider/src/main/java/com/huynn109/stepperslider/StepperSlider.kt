@@ -10,7 +10,6 @@ import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
 import com.google.android.material.slider.Slider
-import timber.log.Timber
 import kotlin.math.max
 
 class StepperSlider : Slider {
@@ -97,7 +96,6 @@ class StepperSlider : Slider {
     }
 
     fun setDotsDrawables(dotsDrawables: Array<out Pair<Int, Int>>) {
-        Timber.d("$value")
         this.dotsDrawables.clear()
         this.dotActives.clear()
         this.dotsResources.clear()
