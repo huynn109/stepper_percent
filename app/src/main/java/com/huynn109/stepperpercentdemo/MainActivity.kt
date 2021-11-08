@@ -18,7 +18,7 @@ class MainActivity : AppCompatActivity() {
                     R.drawable.ic_baseline_adb_24,
                 )
             )
-            value(50f, 3)
+            value(100f, 3)
         }
     }
 }

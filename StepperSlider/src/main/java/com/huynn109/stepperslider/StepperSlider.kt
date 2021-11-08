@@ -116,7 +116,7 @@ class StepperSlider : androidx.appcompat.widget.AppCompatSeekBar {
         this.dotBitmaps.clear()
         dotsDrawables.forEachIndexed { index, pair ->
             this.dotsDrawablesTmp.add(pair)
-            this.dotActives.add(pair.second <= progress)
+            this.dotActives.add(pair.second <= (progress + 5))
             this.dotsResources.add(pair.first)
             this.dotsPositions.add(pair.second)
             this.dotBitmaps.add(

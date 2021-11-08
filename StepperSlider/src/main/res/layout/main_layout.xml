@@ -18,6 +18,8 @@
         app:haloRadius="0dp"
         android:background="@null"
         app:thumbRadius="0dp"
+        android:paddingStart="40dp"
+        android:paddingEnd="40dp"
         app:thumbElevation="0dp"
         app:labelStyle="@style/StepPercentTooltip"
         app:labelBehavior="floating"

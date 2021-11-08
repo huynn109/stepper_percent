@@ -85,12 +85,18 @@ class StepperPercent : RelativeLayout {
                 )
             }
             mBubbleIndicator?.setValue(v.roundToInt())
+            if (v > 90f || v < 10f) mBubbleIndicator?.dismissComplete()
         }, 300)
     }
 
     private fun getStage(v: Float, stage: Int): Float {
         val percentStage = 100 / (result.size - 1)
-        return (v * percentStage) / 100f + (percentStage * (stage - 1))
+        val tmp = when {
+            v <= 15f -> 2f
+            v >= 90f -> -1f
+            else -> 0f
+        }
+        return ((v * percentStage) / 100f) + (percentStage * (stage - 1)) + tmp
     }
 
     @SuppressLint("ClickableViewAccessibility")
