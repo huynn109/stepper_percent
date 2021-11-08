@@ -2,6 +2,7 @@ package com.huynn109.stepperslider
 
 import android.annotation.SuppressLint
 import android.content.Context
+import android.content.res.ColorStateList
 import android.graphics.Bitmap
 import android.graphics.Canvas
 import android.graphics.Color
@@ -9,17 +10,16 @@ import android.graphics.Paint
 import android.graphics.drawable.Drawable
 import android.util.AttributeSet
 import androidx.core.content.ContextCompat
-import com.google.android.material.slider.Slider
 import kotlin.math.max
 
-class StepperSlider : Slider {
+class StepperSlider : androidx.appcompat.widget.AppCompatSeekBar {
     companion object {
-        private const val DEFAULT_ICON_SIZE = 28
+        private const val DEFAULT_ICON_SIZE = 40
         private const val DEFAULT_ICON_RADIUS = 35f
         private const val DEFAULT_ICON_BORDER_WIDTH = 6f
     }
 
-    private var dotsDrawables: MutableList<Pair<Int, Int>> = mutableListOf()
+    private var dotsDrawablesTmp: MutableList<Pair<Int, Int>> = mutableListOf()
 
     private lateinit var paintCircleActive: Paint
 
@@ -61,10 +61,21 @@ class StepperSlider : Slider {
 
     fun setActiveColor(activeColor: Int) {
         this.activeColor = activeColor
+        this.progressTintList =
+            colorStateListOf(intArrayOf(-android.R.attr.state_active) to activeColor)
+        this.thumbTintList =
+            colorStateListOf(intArrayOf(-android.R.attr.state_active) to activeColor)
     }
 
-    fun setInActiveColor(activeColor: Int) {
-        this.inActiveColor = activeColor
+    fun setInActiveColor(inActiveColor: Int) {
+        this.inActiveColor = inActiveColor
+        this.progressBackgroundTintList =
+            colorStateListOf(intArrayOf(-android.R.attr.state_active) to inActiveColor)
+    }
+
+    private fun colorStateListOf(vararg mapping: Pair<IntArray, Int>): ColorStateList {
+        val (states, colors) = mapping.unzip()
+        return ColorStateList(states.toTypedArray(), colors.toIntArray())
     }
 
     @SuppressLint("Recycle")
@@ -82,6 +93,8 @@ class StepperSlider : Slider {
             style = Paint.Style.STROKE
         }
         setPadding(35 + 5, 0, 35 + 5, 0)
+        thumb.mutate().alpha = 0
+        splitTrack =false
     }
 
     fun setDots(dots: MutableList<Int>) {
@@ -95,15 +108,15 @@ class StepperSlider : Slider {
         invalidate()
     }
 
-    fun setDotsDrawables(dotsDrawables: Array<out Pair<Int, Int>>) {
-        this.dotsDrawables.clear()
+    fun setDotsDrawables(dotsDrawables: List<Pair<Int, Int>>) {
+        this.dotsDrawablesTmp.clear()
         this.dotActives.clear()
         this.dotsResources.clear()
         this.dotsPositions.clear()
         this.dotBitmaps.clear()
         dotsDrawables.forEachIndexed { index, pair ->
-            this.dotsDrawables.add(pair)
-            this.dotActives.add(pair.second <= value)
+            this.dotsDrawablesTmp.add(pair)
+            this.dotActives.add(pair.second <= progress)
             this.dotsResources.add(pair.first)
             this.dotsPositions.add(pair.second)
             this.dotBitmaps.add(
@@ -114,7 +127,6 @@ class StepperSlider : Slider {
                 )
             )
         }
-        invalidate()
     }
 
     @Synchronized
@@ -131,7 +143,7 @@ class StepperSlider : Slider {
             fillCircleStrokeBorder(
                 canvas,
                 step * positionOfPoint + (paddingLeft),
-                0f + (max(this.height, trackHeight) / 2),
+                0f + (max(this.height, height) / 2),
                 DEFAULT_ICON_RADIUS,
                 backgroundCircle,
                 DEFAULT_ICON_BORDER_WIDTH,
@@ -163,7 +175,7 @@ class StepperSlider : Slider {
     private fun drawCircle(canvas: Canvas, step: Float, position: Int, paint: Paint) {
         canvas.drawCircle(
             step * position + (paddingLeft),
-            0f + (max(this.height, trackHeight) / 2),
+            0f + (max(this.height, height) / 2),
             DEFAULT_ICON_RADIUS,
             paint
         )
@@ -205,7 +217,7 @@ class StepperSlider : Slider {
         }
         val canvas = Canvas(bitmap)
         drawable?.apply {
-            setBounds(0, 0, newWidth.toInt(), newHeight.toInt())
+            setBounds(0, 0 - 2, newWidth.toInt(), newHeight.toInt() - 2)
             setTint(color)
             draw(canvas)
         }
@@ -213,7 +225,7 @@ class StepperSlider : Slider {
         return bitmap
     }
 
-    fun resetColorWithNewValue() {
-        setDotsDrawables(this.dotsDrawables.toTypedArray())
+    fun resetColorWithNewValue(result: MutableList<Pair<Int, Int>>) {
+        setDotsDrawables(result)
     }
 }

@@ -12,6 +12,7 @@ import android.widget.LinearLayout
 import android.widget.RelativeLayout
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.slider.Slider
+import kotlin.math.roundToInt
 
 
 class StepperPercent : RelativeLayout {
@@ -40,6 +41,10 @@ class StepperPercent : RelativeLayout {
 
     private var isDisableDrag: Boolean = true
 
+    private var mBubbleIndicator: PopupIndicator? = null
+
+    val result: MutableList<Pair<Int, Int>> = mutableListOf()
+
     constructor(context: Context?) : super(context) {
         init()
     }
@@ -64,19 +69,35 @@ class StepperPercent : RelativeLayout {
         linearProgressIndicator = findViewById(R.id.progress_indicator)
         linearMainLayout = findViewById(R.id.linear_main)
         setColor()
+        disableTouch(true)
     }
 
-    fun value(v: Float) {
-        linearProgressIndicator.value = v
+    fun value(v: Float, stage: Int = 1) {
+        mBubbleIndicator = PopupIndicator(context)
+        val processTmp = getStage(v, stage)
         Handler(Looper.getMainLooper()).postDelayed({
-            linearProgressIndicator.showLabelUntilNextTouchUp()
-            linearProgressIndicator.resetColorWithNewValue()
+            linearProgressIndicator.progress = processTmp.toInt()
+            linearProgressIndicator.resetColorWithNewValue(result)
+            rootView?.let {
+                mBubbleIndicator?.showIndicator(
+                    it,
+                    linearProgressIndicator.thumb.bounds
+                )
+            }
+            mBubbleIndicator?.setValue(v.roundToInt())
         }, 300)
     }
 
+    private fun getStage(v: Float, stage: Int): Float {
+        val percentStage = 100 / (result.size - 1)
+        return (v * percentStage) / 100f + (percentStage * (stage - 1))
+    }
+
     @SuppressLint("ClickableViewAccessibility")
-    fun disableTouch(isEnable: Boolean) {
-        linearProgressIndicator.setOnTouchListener { _, _ -> isEnable }
+    fun disableTouch(isDisable: Boolean) {
+        linearProgressIndicator.setOnTouchListener { _, _ ->
+            isDisable
+        }
     }
 
     private fun handleAttributes(attrs: AttributeSet?) {
@@ -108,19 +129,27 @@ class StepperPercent : RelativeLayout {
         linearProgressIndicator.setInActiveColor(inActiveColor)
     }
 
-    @SuppressLint("ClickableViewAccessibility")
-    fun setSteps(vararg drawableResources: Pair<Int, Int>) {
+    private fun setStepList(drawableResources: List<Pair<Int, Int>>) {
         linearProgressIndicator.setDotsDrawables(drawableResources)
+    }
+
+    @SuppressLint("ClickableViewAccessibility")
+    fun setSteps(drawableResources: List<Int>) {
+        val stagePercent = 100 / (drawableResources.size - 1)
+        drawableResources.forEachIndexed { index, t ->
+            result.add(
+                Pair(
+                    t,
+                    if (index == drawableResources.size - 1) 100 else stagePercent * index
+                )
+            )
+        }
+        setStepList(result)
     }
 }
 
 @SuppressLint("ClickableViewAccessibility")
 fun Slider.showLabelUntilNextTouchUp() {
-    // sent a touch event to cause the label for the slider to show.
-    // a side effect of calling onTouchEvent is that it will cause
-    // the slider to change the progress value; we save the original
-    // progress value before calling onTouchEvent, then restore the
-    // value after calling onTouchEvent.
     val originalValue = value
     onTouchEvent(
         MotionEvent.obtain(0L, 0L, MotionEvent.ACTION_DOWN, 0f, 0f, 0)
