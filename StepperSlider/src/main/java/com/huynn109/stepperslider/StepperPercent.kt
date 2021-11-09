@@ -10,6 +10,7 @@ import android.view.MotionEvent
 import android.view.View
 import android.widget.LinearLayout
 import android.widget.RelativeLayout
+import android.widget.TextView
 import androidx.constraintlayout.widget.ConstraintLayout
 import com.google.android.material.slider.Slider
 import kotlin.math.roundToInt
@@ -30,6 +31,7 @@ class StepperPercent : RelativeLayout {
 
     // Linear layout main view
     private var linearMainLayout: LinearLayout? = null
+    private var tvBubble: TextView? = null
 
     // Color of indicator and line
     private var defaultColor: Int = 0
@@ -68,24 +70,23 @@ class StepperPercent : RelativeLayout {
         rootView = findViewById(R.id.root_view)
         linearProgressIndicator = findViewById(R.id.progress_indicator)
         linearMainLayout = findViewById(R.id.linear_main)
+        tvBubble = findViewById(R.id.tvBubble)
         setColor()
         disableTouch(true)
     }
 
+    @SuppressLint("SetTextI18n")
     fun value(v: Float, stage: Int = 1) {
-        mBubbleIndicator = PopupIndicator(context)
         val processTmp = getStage(v, stage)
         Handler(Looper.getMainLooper()).postDelayed({
             linearProgressIndicator.progress = processTmp.toInt()
             linearProgressIndicator.resetColorWithNewValue(result)
-            rootView?.let {
-                mBubbleIndicator?.showIndicator(
-                    it,
-                    linearProgressIndicator.thumb.bounds
-                )
-            }
-            mBubbleIndicator?.setValue(v.roundToInt())
-            if (v > 90f || v < 10f) mBubbleIndicator?.dismissComplete()
+            tvBubble?.text = "${v.roundToInt()}%"
+            if (v > 90f || v < 10f) tvBubble?.visibility = View.GONE
+            else tvBubble?.visibility = View.VISIBLE
+            tvBubble?.x =
+                linearProgressIndicator.thumb.bounds.centerX().toFloat() - ((tvBubble?.width
+                    ?: 0f).toFloat() / 3f)
         }, 300)
     }
 

@@ -20,7 +20,7 @@ import androidx.core.content.ContextCompat
 class PopupIndicator(
     context: Context,
 ) {
-    private val mWindowManager: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
+//    private val mWindowManager: WindowManager = context.getSystemService(Context.WINDOW_SERVICE) as WindowManager
     var isShowing = false
         private set
     private var mPopupView: Floater?
@@ -38,15 +38,15 @@ class PopupIndicator(
         if (isShowing) {
             return
         }
-        val windowToken = parent.windowToken
-        if (windowToken != null) {
-            val p = createPopupLayout(windowToken)
-            p.gravity = Gravity.TOP or Gravity.START
-            updateLayoutParamsForPosition(parent, p, touchBounds.top)
+//        val windowToken = parent.windowToken
+//        if (windowToken != null) {
+//            val p = createPopupLayout(windowToken)
+//            p.gravity = Gravity.TOP or Gravity.START
+//            updateLayoutParamsForPosition(parent, p, touchBounds.top)
             isShowing = true
             translateViewIntoPosition(touchBounds.centerX())
-            invokePopup(p)
-        }
+//            invokePopup(p)
+//        }
     }
 
     fun move(x: Int) {
@@ -64,7 +64,7 @@ class PopupIndicator(
         if (isShowing) {
             isShowing = false
             try {
-                mWindowManager.removeViewImmediate(mPopupView)
+//                mWindowManager.removeViewImmediate(mPopupView)
             } finally {
             }
         }
@@ -92,7 +92,7 @@ class PopupIndicator(
     }
 
     private fun invokePopup(p: WindowManager.LayoutParams) {
-        mWindowManager.addView(mPopupView, p)
+//        mWindowManager.addView(mPopupView, p)
     }
 
     private fun createPopupLayout(token: IBinder): WindowManager.LayoutParams {
