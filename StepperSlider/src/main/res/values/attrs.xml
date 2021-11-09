@@ -6,6 +6,7 @@
         <attr name="default_color" format="color" />
         <attr name="active_color" format="color" />
         <attr name="inactive_color" format="color" />
+        <attr name="icons" format="reference" />
     </declare-styleable>
 
 </resources>

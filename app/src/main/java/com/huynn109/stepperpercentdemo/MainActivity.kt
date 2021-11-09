@@ -9,16 +9,6 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         val stepperPercent = findViewById<StepperPercent>(R.id.stepperPercent)
-        stepperPercent.apply {
-            setSteps(
-                listOf(
-                    R.drawable.ic_baseline_adb_24,
-                    R.drawable.ic_baseline_adb_24,
-                    R.drawable.ic_baseline_adb_24,
-                    R.drawable.ic_baseline_adb_24,
-                )
-            )
-            value(20f, 1)
-        }
+        stepperPercent.value(20f, 1)
     }
 }

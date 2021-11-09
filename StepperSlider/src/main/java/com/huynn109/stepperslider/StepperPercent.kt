@@ -45,6 +45,8 @@ class StepperPercent : RelativeLayout {
 
     private var mBubbleIndicator: PopupIndicator? = null
 
+    private var drawableResources: MutableList<Int> = mutableListOf()
+
     val result: MutableList<Pair<Int, Int>> = mutableListOf()
 
     constructor(context: Context?) : super(context) {
@@ -73,6 +75,7 @@ class StepperPercent : RelativeLayout {
         tvBubble = findViewById(R.id.tvBubble)
         setColor()
         disableTouch(true)
+        if (drawableResources.isNullOrEmpty().not()) setSteps(drawableResources)
     }
 
     @SuppressLint("SetTextI18n")
@@ -124,6 +127,13 @@ class StepperPercent : RelativeLayout {
                 R.styleable.StepperPercent_inactive_color,
                 Color.parseColor("#cccccc")
             )
+            val drawableId = typedArray.getResourceId(R.styleable.StepperPercent_icons, 0)
+            val drawableArray = context.resources.obtainTypedArray(drawableId)
+            for (i in 0 until drawableArray.length()) {
+                val resourceId = drawableArray.getResourceId(i, -1)
+                drawableResources.add(resourceId)
+            }
+            drawableArray.recycle()
         } catch (e: Exception) {
             e.printStackTrace()
         }

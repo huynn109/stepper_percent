@@ -14,6 +14,7 @@
         android:layout_height="wrap_content"
         app:active_color="#f17423"
         app:inactive_color="@color/grey"
+        app:icons="@array/stepperIcon"
         android:layout_marginTop="20dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
